@@ -1,0 +1,135 @@
+Note: This changelog file was created when version 1.3.1 was finished. No update logs for previous versions.
+
+6.2.0 4/11
+Players now able to select who to swap hands with when using a 7. 
+
+6.1.0 4/11
+Updated look for selecting whether to play a card you just drew.
+Updated look for selecting whether you want to stack or not.
+Updated animation for +2 and +4 to show the total stacked number of cards as well. 
+
+6.0.0 4/10
+Added new stacking feature!
+Still need to update the look for clicking a card to stack with. 
+
+5.1.0 4/9 (Really should be 6.0 for the effort)
+Fixed issue with clients leaving and not being replaced and messing up the rest of the game. 
+Fixed issue with clients receiving someone else's hand
+Completely remade most animations so they aren't just a bigger card popping up
+Bots now act more human with more strategic artificial delays. 
+	An issue right now is that since the previous turn's actions are not recorded, if player 1 played a skip, player
+		3 then drew a card and didn't play, a bot at player 4's position will pause because they thought someone
+		before it played a skip. 
+New animations needed for Redistribute cards, Randomly draw cards, and the 7. 
+
+5.0.0 4/9
+Client disconnecting will now instantly replace the client with a bot. :D
+When there are no human players left, stop the game. 
+Completely unnecessary to check if exception is socket connection error: when client closes stage, 
+	send message to server saying "this client dc" and server will close their connections to that
+	client, and Game will take care of replacing it with a bot player
+
+4.1.0 4/9
+Minor tweaks in GameGUI to make players drawing in the upper left corner have the card rotated at the correct angle.
+Changed how Exceptions are handled throughout the program --> lots of methods now simply throw an exception
+	instead of handling it by themselves. Eventually, the UnoGame class will receive what the exception is. 
+	Then, the UnoGame will end the infinite loop and exit. 
+Future goal is to determine if the exception is a socket connection error. If it is, then it's because someone disconnected
+	In this case, 
+
+4.0.0 4/9
+Fixed bug with bot so that it correctly determines who is the next player.
+Bot now has more logic built in so it's less stupid.
+Putting the previous version at 3.0.0 is really undercutting what's been done, so we're bumping this one.
+
+3.0.0 4/8
+There we have it. Bots!
+Artificial delay if last card had some sort of animation with it so we only see 1 animation at a time lol.
+Need to tweak how it chooses a color for wild cards tomorrow, should be easy. 
+
+2.5.0 4/8
+Ready for full update to support bots.
+Fixed critical bug in UnoGameGUI that made played cards not at the center of the pane. 
+
+2.4.1 4/8
+Arraylists for humans are no more! Hashtables rule!
+
+2.4.0 4/7
+Upcoming for 3.0: Code overhaul for UnoServer.java for upcoming support for bots. Server should no longer be
+	requesting for a certain client to answer; UnoGame should be asking Server to request client for answer,
+		OR, UnoGame should be calling a bot to make a move. 
+	This means that clients won't necessarily be in the same index in the Server arraylist of clients as the game turn.
+
+Added new card: When played, each player, on average, will draw 3 cards. There is no minimum or maximum, but that
+	the total number of cards drawn by all players is equal to 3 * total number of players. 
+New methods in Util and UnoCard to shorten code in UnoGame and UnoGameGUI even more.
+
+2.3.1 4/7
+Changed how redistribute redistributes cards: the person who played it will receive the least cards
+
+2.3.0 4/6
+Players are no longer able to click on their cards when it's not their turn. This bug was due to NOT updating
+	every player's hand after each turn, because the original thought process is that if they didn't gain
+	or lose a card, they shouldn't need to update. 
+Additionally, to prevent people from clicking multiple times during their turn to try to break the game,
+	after a player clicks on the card (if wild, after selecting color), their own cursor is disabled.
+Action handlers for the cards in your hand now also check if cursor is enabled before doing their actions.
+New server launcher look
+
+2.2.0 4/6
+Added new feature that can be enabled. If enabled, playing a 7 now randomly swaps your cards with someone else.
+Likewise with 0, if it is your last card, you will win.
+A bug that I know is present: Change x and y difference if you're swapping with someone with angle between 
+	critical top left and critical top right
+
+2.1.0 4/5
+Added new feature that can be enabled. If enabled, playing a 0 now rotates everyone's cards.
+However, if it is your last card, you will win and no rotations will occur.
+
+2.0.1 4/5
+Now prevents people from clicking in other places when a popup window appears. This would prevent dion from
+	messing up my program intentionally. 
+
+2.0.0 4/5
+Huge amount of code rewritten to optimize how new special effects cards can be coded in. 
+Animation 'should' be smoother, especially with card drawing. (I spent a lot of time fine-tuning them)
+
+1.4.5 4/4
+Renamed Redistribute to Socialism because "Redistribute" contains "Red"
+Bug fixes regarding whether a card is compatible with the previously played card. These came from
+	the addition of the Socialism since Socialism by itself doesn't change the color nor the value of the previous card
+ty joshua for some extra images
+
+1.4.4 4/4
+New type of card: Redistribute. Redistributes everyone the same (almost the same if not perfectly divisible) number of cards
+	The cards are randomly distributed. 
+Took about 10 min of debugging because didn't copy and paste a code to another place because bad code.
+Took about 20 more min of debugging because messed up variable names in a nested for loop
+
+1.4.3 4/4
+Prevented another way of spamming the draw button. 
+Ready to do large code overhaul for implementation of new mechanics
+
+1.4.2 4/4
+Added special effects when you play a special card
+Code Cleanup
+
+1.4.1 4/4
+Changed how drawing a card that you would now be able to play would be animated. 
+It used to be a popup to select "yes" or "no", if you click no, then the drawing card animation would play.
+Now, the drawing card animation is shown, then the popup appears. If you click no, nothing happens. If you
+	click yes, the playing a card animation happens.
+
+1.4 4/4
+Now able to select whether to enable or disable (being able to draw a card only if you can't play anything)
+
+1.3.2 4/4
+When you close the "do you want to play this card you just drew" window, it defaults to you saying "no"
+Fixed issue with people spamming the "Draw" button to keep drawing cards during their turn
+Fixed issue with animation where a card drawing animation is played twice because of the original code for animation
+
+1.3.1 4/4
+When you draw a card that can be playable, the user is asked if they want to play the card. 
+When cards are drawn, they happen one at a time for aesthetic purposes. 
+Lots of code is now really bad, because implementing animation of 1 card at a time now causes a lot of code to be called numerous
+	times per turn. 

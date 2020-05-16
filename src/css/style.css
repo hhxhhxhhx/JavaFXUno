@@ -1,0 +1,25 @@
+.toggle-button {
+	/*-fx-alignment: top-center;*/
+	-fx-font-size: 16px;
+	-fx-background-color: rgb(0,150,219);
+}
+.toggle-button:selected {
+	/*-fx-alignment: top-center;*/
+	-fx-font-size: 16px;
+	-fx-background-color: rgb(0,168,80);
+}
+.toggle-button:focused {
+	-fx-font-size: 16px;
+	-fx-background-color: lightskyblue;
+}
+.button {
+	/*-fx-alignment: top-center;*/
+	-fx-font-size: 16px;
+}
+.label {
+	-fx-alignment: center-left;
+	-fx-font-size: 16px;
+}
+#topInfo {
+	-fx-font-size: 20px;
+}
